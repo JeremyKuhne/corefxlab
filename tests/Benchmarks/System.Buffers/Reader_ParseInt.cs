@@ -26,7 +26,7 @@ namespace System.Buffers.Benchmarks
         }
 
         [Benchmark]
-        public void ParseInt32()
+        public void ParseInt32_BufferReader()
         {
             BufferReader<byte> reader = new BufferReader<byte>(s_ros);
 
@@ -38,6 +38,18 @@ namespace System.Buffers.Benchmarks
         }
 
         [Benchmark]
+        public void ParseInt32_SpanReader()
+        {
+            SpanReader<byte> reader = new SpanReader<byte>(s_array);
+
+            while (reader.TryParse(out int value, out _))
+            {
+                // Skip the delimiter
+                reader.Advance(1);
+            }
+        }
+
+        // [Benchmark]
         public void ParseInt32_Split()
         {
             BufferReader<byte> reader = new BufferReader<byte>(s_rosSplit);

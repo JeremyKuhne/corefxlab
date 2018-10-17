@@ -4,6 +4,7 @@
 
 using System.Buffers.Binary;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace System.Buffers.Reader
@@ -19,6 +20,7 @@ namespace System.Buffers.Reader
         /// <returns>
         /// True if successful. <paramref name="value"/> will be default if failed.
         /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe bool TryRead<T>(ref this BufferReader<byte> reader, out T value) where T : unmanaged
         {
             ReadOnlySpan<byte> span = reader.UnreadSpan;

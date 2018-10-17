@@ -95,6 +95,15 @@ namespace System.Buffers.Benchmarks
         }
 
         [Benchmark]
+        public void TryReadUntil_SpanReader_Span_OneSegment()
+        {
+            SpanReader<byte> reader = new SpanReader<byte>(s_array);
+            while (reader.TryReadTo(out ReadOnlySpan<byte> bytes, 42))
+            {
+            }
+        }
+
+        [Benchmark]
         public void TryReadUntilAny_2_Span()
         {
             BufferReader<byte> reader = new BufferReader<byte>(s_rosSplit);

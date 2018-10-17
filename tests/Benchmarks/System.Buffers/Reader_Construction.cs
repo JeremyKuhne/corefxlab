@@ -31,6 +31,12 @@ namespace System.Buffers.Benchmarks
         }
 
         [Benchmark]
+        public void ConstructSingleSegment_Span()
+        {
+            new SpanReader<byte>(s_array);
+        }
+
+        // [Benchmark]
         public void ConstructMultiSegment()
         {
             new BufferReader<byte>(s_rosSplit);

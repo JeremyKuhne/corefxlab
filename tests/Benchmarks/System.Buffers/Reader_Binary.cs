@@ -34,6 +34,16 @@ namespace System.Buffers.Benchmarks
         }
 
         [Benchmark]
+        public void ReadInt32_SpanReader()
+        {
+            SpanReader<byte> reader = new SpanReader<byte>(s_array);
+
+            while (reader.TryRead(out int value))
+            {
+            }
+        }
+
+        [Benchmark]
         public void ReadInt32_BigEndian()
         {
             BufferReader<byte> reader = new BufferReader<byte>(s_ros);
